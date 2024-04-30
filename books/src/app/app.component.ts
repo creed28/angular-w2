@@ -78,20 +78,28 @@ export class AppComponent {
   public modelDescription: string = this.getCurrentBook().description;
   public modelRating: number = 1;
 
+  public isFormInvalid(): boolean {
+    return (
+      !this.modelTitle ||
+      !this.modelAuthor ||
+      !this.modelDescription ||
+      this.modelRating <= 0 ||
+      this.modelRating > 5
+    );
+  }
+
   private processNextBook() {
     this.index++;
+    
     if (this.index >= this.bookList.length) {
       this.index = 0;
     }
+
     this.resetTempData();
   }
 
   public processSaveBookData() {
     const currentBook = this.getCurrentBook();
-
-    if (this.modelTitle === "" || this.modelAuthor === "" || this.modelDescription === "" || (this.modelRating <= 0 || this.modelRating > 5)) {
-      return;
-    }
     
     currentBook.title = this.modelTitle;
     currentBook.author = this.modelAuthor;

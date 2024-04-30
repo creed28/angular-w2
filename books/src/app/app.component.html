@@ -1,49 +1,55 @@
-<div>
-  <div>
-    <div>
+<h1>Hristo's Book Collection</h1>
+
+<section class="wrapper">
+  <div class="book-details">
+    <div class="content">
+      <span class="heading">Title</span>
       {{ getCurrentBook().title }}
     </div>
-    <div>
+    <div class="content">
+      <span class="heading">Author</span>
       {{ getCurrentBook().author }}
     </div>
-    <div>
+    <div class="content">
+      <span class="heading">Description</span>
       {{ getCurrentBook().description }}
     </div>
-    <img src="{{getCurrentBook().src}}" alt="Book Cover">
-    <div>
+    <img src="{{getCurrentBook().src}}" alt="Book Cover" class="coverImg">
+    <div class="content">
+      <span class="heading">Rating</span>
       {{ getCurrentBook().averageRating }}
     </div>
-
-    <div>
-        <input 
-          [(ngModel)]="modelTitle"
-          type="text" 
-          placeholder="Title"
-        >
-        <input 
-          [(ngModel)]="modelAuthor"
-          type="text" 
-          placeholder="Author"
-        >
-        <input 
-          [(ngModel)]="modelDescription"
-          type="text" 
-          placeholder="Description"
-        >
-        <input 
-          [(ngModel)]="modelRating"
-          type="number" 
-          max="5"
-          min="1"
-        >
-
-        @if(this.modelTitle === "" || this.modelAuthor === "" || this.modelDescription === "" || (this.modelRating <= 0 || this.modelRating > 5)) {
-          <div>Error</div>
-        }
-        
-        <button (click)="processSaveBookData()">
-          Save book
-      </button>
-    </div>
   </div>
-</div>
+  <div class="input-details">
+    <h2>Edit {{ getCurrentBook().title }}</h2>
+    <input 
+      [(ngModel)]="modelTitle"
+      type="text" 
+      placeholder="Title"
+    >
+    <input 
+      [(ngModel)]="modelAuthor"
+      type="text" 
+      placeholder="Author"
+    >
+    <textarea
+      [(ngModel)]="modelDescription"
+      placeholder="Description"
+      rows="5"
+    ></textarea>
+    <input 
+      [(ngModel)]="modelRating"
+      type="number" 
+      max="5"
+      min="1"
+    >
+
+    @if (isFormInvalid()) {
+      <div class="error">Error</div>
+    }
+    
+    <button (click)="processSaveBookData()" [disabled]="isFormInvalid()">
+      Save changes
+    </button>
+  </div>
+</section>
