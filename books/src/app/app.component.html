@@ -1,3 +1,49 @@
 <div>
-  {{title}}
+  <div>
+    <div>
+      {{ getCurrentBook().title }}
+    </div>
+    <div>
+      {{ getCurrentBook().author }}
+    </div>
+    <div>
+      {{ getCurrentBook().description }}
+    </div>
+    <img src="{{getCurrentBook().src}}" alt="Book Cover">
+    <div>
+      {{ getCurrentBook().averageRating }}
+    </div>
+
+    <div>
+        <input 
+          [(ngModel)]="modelTitle"
+          type="text" 
+          placeholder="Title"
+        >
+        <input 
+          [(ngModel)]="modelAuthor"
+          type="text" 
+          placeholder="Author"
+        >
+        <input 
+          [(ngModel)]="modelDescription"
+          type="text" 
+          placeholder="Description"
+        >
+        <input 
+          [(ngModel)]="modelRating"
+          type="number" 
+          max="5"
+          min="1"
+        >
+
+        @if(this.modelTitle === "" || this.modelAuthor === "" || this.modelDescription === "" || (this.modelRating <= 0 || this.modelRating > 5)) {
+          <div>Error</div>
+        }
+        
+        <button (click)="processSaveBookData()">
+          Save book
+      </button>
+    </div>
+  </div>
 </div>
