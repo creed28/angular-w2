@@ -102,11 +102,6 @@ export class AppComponent {
 
   private processNextBook() {
     this.index++;
-    
-    if (this.index >= this.bookList.length) {
-      this.index = 0;
-    }
-
     this.resetTempData();
   }
 
