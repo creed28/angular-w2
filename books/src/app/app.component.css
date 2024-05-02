@@ -57,7 +57,7 @@
   margin-bottom: 10px;
 }
 
-.input-details button {
+button {
   padding: 10px 20px;
   font-size: 1rem;
   background-color: #007bff;
@@ -67,7 +67,7 @@
   cursor: pointer;
 }
 
-.input-details button:hover {
+button:hover {
   background-color: #0056b3;
 }
 
@@ -81,4 +81,12 @@ button[disabled] {
   color: red;
   font: bold;
   font-size: 1.2rem;
+}
+
+.control-buttons {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
 }

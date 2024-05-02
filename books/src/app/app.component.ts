@@ -72,11 +72,23 @@ export class AppComponent {
   ];
 
   private index: number = 0;
+  public ratingCompleted: boolean = false;
 
   public modelTitle: string = this.getCurrentBook().title;
   public modelAuthor: string = this.getCurrentBook().author;
   public modelDescription: string = this.getCurrentBook().description;
   public modelRating: number = 1;
+
+  public startOver() {
+    this.index = 0;
+    this.resetTempData();
+    this.ratingCompleted = false;
+  }
+
+  public finishRating() {
+    alert('Rating process completed successfully!');
+    this.ratingCompleted = false;
+  }
 
   public isFormInvalid(): boolean {
     return (
@@ -108,19 +120,18 @@ export class AppComponent {
 
     this.calculateRating();
 
+    if (this.index === this.bookList.length - 1) {
+      this.ratingCompleted = true;
+      return;
+    }
+
     this.processNextBook();
   }
 
   private calculateRating() {
     const currentBook = this.getCurrentBook();
     const ratings = currentBook.ratings;
-  
-    if (ratings.length === 0) {
-      currentBook.averageRating =  0;
-    }
-  
     const sumOfRatings = ratings.reduce((total, rating) => total + rating, 0);
-  
     const averageRating = sumOfRatings / ratings.length;
   
     currentBook.averageRating = averageRating;

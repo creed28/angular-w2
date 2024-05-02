@@ -8,13 +8,13 @@
     </div>
     <div class="content">
       <span class="heading">Author</span>
-      {{ getCurrentBook().author }}
+      {{ getCurrentBook().author }} 
     </div>
     <div class="content">
       <span class="heading">Description</span>
       {{ getCurrentBook().description }}
     </div>
-    <img src="{{getCurrentBook().src}}" alt="Book Cover" class="coverImg">
+    <img src="{{ getCurrentBook().src }}" alt="Book Cover" class="coverImg">
     <div class="content">
       <span class="heading">Rating</span>
       {{ getCurrentBook().averageRating }}
@@ -26,16 +26,19 @@
       [(ngModel)]="modelTitle"
       type="text" 
       placeholder="Title"
+      [disabled]="getCurrentBook().averageRating === 0"
     >
     <input 
       [(ngModel)]="modelAuthor"
       type="text" 
       placeholder="Author"
+      [disabled]="getCurrentBook().averageRating === 0"
     >
     <textarea
       [(ngModel)]="modelDescription"
       placeholder="Description"
       rows="5"
+      [disabled]="getCurrentBook().averageRating === 0"
     ></textarea>
     <input 
       [(ngModel)]="modelRating"
@@ -47,9 +50,17 @@
     @if (isFormInvalid()) {
       <div class="error">Error</div>
     }
-    
-    <button (click)="processSaveBookData()" [disabled]="isFormInvalid()">
+
+    <button (click)="processSaveBookData()" [disabled]="isFormInvalid() || ratingCompleted">
       Save changes
     </button>
   </div>
 </section>
+
+
+@if (ratingCompleted) {
+  <section class="control-buttons">
+    <button (click)="startOver()">Start Over</button>
+    <button (click)="finishRating()">Finish Rating</button>
+  </section>
+}
